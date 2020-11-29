@@ -1,0 +1,23 @@
+version: '3'
+services:
+  user_db:
+    image: postgres:alpine
+    volumes:
+      - ./.persistence/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 15432:5432
+  user_redis:
+    image: redis:alpine
+    ports:
+      - 16379:6379
+  user:
+    build:
+      context: .
+    ports:
+      - 9000:9000
+    depends_on:
+      - user_db
+      - user_redis
+    #command: rake db:migrate

@@ -1,0 +1,8 @@
+development:
+  adapter: postgres
+  host: user_db
+  database: postgres
+  user: postgres
+  password: postgres
+
+production: <%= ENV['DATABASE_URL'] %>
