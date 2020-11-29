@@ -13,10 +13,25 @@ USER_ROUTE = proc do
       email: req["email"],
       password: CryptoService.generate(req["password"]),
       nickname: req["nickname"],
+      is_admin: false,
     )
     yajl :empty
   rescue Sequel::UniqueConstraintViolation => _e
     raise UnauthorizedError.new("User Existed")
+  end
+
+  # Get all users
+  get "" do
+    User.auth!(request).admin!
+    page = (params[:page] || 1).to_i
+    size = (params[:size] || 10).to_i
+
+    yajl :users, locals: {
+                   count: User.count,
+                   page: page,
+                   size: size,
+                   users: User.dataset.paginate(page, size),
+                 }
   end
 
   # View profile
@@ -25,7 +40,7 @@ USER_ROUTE = proc do
     entity = User.where(id: id)&.first
     raise NotFoundError.new("User: #{id}", "User Not Existed") if user.nil?
     user.own!(entity)
-    yajl :profile, locals: { user: user }
+    yajl :profile, locals: { user: entity }
   end
 
   # Edit profile
