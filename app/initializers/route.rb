@@ -16,7 +16,7 @@ class Route < Sinatra::Base
   end
 
   namespace '/', &ROOT_ROUTE
-  namespace '/api/user', &USER_ROUTE
+  namespace '/user', &USER_ROUTE
 
   error 500 do |error|
     [
