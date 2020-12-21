@@ -60,14 +60,14 @@ USER_ROUTE = proc do
     user = User.auth!(request)
 
     req = JSON.parse(request.body.read)
-    delivery_info = DeliveryInfo.create(
+    info = DeliveryInfo.create(
       name: req['name'],
       phone: req['phone'],
       address: req['address'],
       user: user
     )
 
-    yajl :empty
+    yajl :delivery_info, locals: {info: info}
   end
 
   # Update a delivery info
