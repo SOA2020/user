@@ -1,0 +1,13 @@
+json = {
+  count: count,
+  page: page,
+  size: size,
+  deliveryInfos: delivery_infos.map do |info|
+    {
+      id: info.id,
+      name: info.name,
+      phone: info.phone,
+      address: info.address
+    }
+  end
+}

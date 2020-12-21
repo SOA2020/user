@@ -1,0 +1,6 @@
+json = {
+  id: info.id,
+  name: info.name,
+  phone: info.phone,
+  address: info.address
+}

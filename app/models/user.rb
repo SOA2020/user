@@ -14,15 +14,15 @@ class User < Sequel::Model
   end
 
   def admin?
-    self.is_admin
+    is_admin
   end
 
   def admin!
-    raise UnauthorizedError.new('Admin Only') unless admin?
+    raise UnauthorizedError, 'Admin Only' unless admin?
   end
 
   def own?(user)
-    self.admin? || self == user
+    admin? || self == user
   end
 
   def own!(user)
