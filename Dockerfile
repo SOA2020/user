@@ -1,5 +1,8 @@
 FROM ruby:2.7
 
+COPY ./sources.list /etc/apt/sources.list
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev postgresql-client
+
 RUN mkdir /app
 WORKDIR /app
 
@@ -12,4 +15,6 @@ RUN bundle install
 COPY . /app
 
 EXPOSE 9000
-CMD ["rake", "run:server"]
+
+ENTRYPOINT [ "/app/wait-for-postgres.sh" ]
+CMD ["rake run:server"]

@@ -20,4 +20,4 @@ services:
     depends_on:
       - user_db
       - user_redis
-    #command: rake db:migrate
+    #command: "rake db:migrate"
