@@ -8,7 +8,7 @@ json = {
       email: user.email,
       nickname: user.nickname,
       avatar: user.avatar,
-      is_admin: user.admin?,
+      isAdmin: user.admin?,
     }
   end
 }

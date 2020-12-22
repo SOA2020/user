@@ -2,8 +2,8 @@ json = {
   id: user.id,
   email: user.email,
   nickname: user.nickname,
-  is_admin: user.admin?,
+  isAdmin: user.admin?,
   avatar: user.avatar,
-  created_at: user.created_at,
-  updated_at: user.updated_at,
+  createdAt: user.created_at,
+  updatedAt: user.updated_at,
 }
