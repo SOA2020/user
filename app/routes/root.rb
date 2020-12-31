@@ -20,7 +20,7 @@ ROOT_ROUTE = proc do
       avatar: "default",
       is_admin: false,
     )
-    yajl :empty
+    yajl :profile, locals: { user: user }
   rescue Sequel::UniqueConstraintViolation => _e
     raise UnauthorizedError.new("User Existed")
   end
