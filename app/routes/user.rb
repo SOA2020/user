@@ -102,6 +102,15 @@ USER_ROUTE = proc do
     }
   end
 
+  get '/:id/delivery_infos/:info_id' do |id, info_id|
+    user = User.auth!(request)
+    info = DeliveryInfo.where(user_id: id, id: info_id)&.first
+    raise NotFoundError.new("DeliveryInfo: #{info_id}", 'Delivery Info Not Existed') if info.nil?
+    user.own!(info.user)
+
+    yajl :delivery_info, locals: { info: info }
+  end
+
   # Remove a delivery info
   delete '/:id/delivery_infos/:info_id' do |id, info_id|
     user = User.auth!(request)
