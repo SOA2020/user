@@ -34,7 +34,7 @@ USER_ROUTE = proc do
     req = JSON.parse(request.body.read)
     entity.nickname = req['nickname'] unless req['nickname'].nil?
     entity.email = req['email'] unless req['email'].nil?
-    entity.avatar = req['avatar'] unless req['avatar'].nil?
+    entity.avatar = "user#{id}" if entity.avatar == 'default'
     entity.save
 
     yajl :profile, locals: { user: entity }
