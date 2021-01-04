@@ -3,5 +3,6 @@ json = {
   user: {
     id: user.id,
     email: user.email,
+    isAdmin: user.admin?
   },
 }
